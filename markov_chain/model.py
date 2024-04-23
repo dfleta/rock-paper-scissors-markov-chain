@@ -170,5 +170,6 @@ samples = [[[1], [1]],
          [1]]]
 '''
 
-sequence = [ "sun" if sample[1][0] == 0 else "rain" for sample in samples ]
-print(sequence)
+population = [ "sun" if sample[1][0] == 0 else "rain" for sample in samples ]
+print(f'Numero de muestras: {len(population)}')
+print(" -> ".join(population))

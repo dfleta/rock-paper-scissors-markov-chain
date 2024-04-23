@@ -47,13 +47,16 @@ observations = [
 ]
 
 X = numpy.array([[[['umbrella', 'no_umbrella'].index(observation)] for observation in observations]])
-print(X.shape)
+print(f'Dimensiones del array de observaciones: {X.shape}')
 # (1, 9, 1)
 
-# Predecir el estado oculto, el estado del tiempo
+# Predecir el estado oculto, el estado del clima
 y_hat = model.predict(X)
 
 hmm_predictions = ["sun" if y.item() == 0 else "rain" for y in y_hat[0]]
-print(list(zip(observations, hmm_predictions)))
+
+for observation, prediction in zip(observations, hmm_predictions):
+    print(f'{observation} -> {prediction}')
+
 # print("observaciones:\n {}".format(' '.join(observations)))
 # print("hmm pred:\n {}".format(' '.join(["sun" + "->" if y.item() == 0 else "rain" + "->" for y in y_hat[0]])))

@@ -26,8 +26,10 @@ o
 ### Markov Chain
 
 ```python
-$ python markov_chain/model.py 
-['sun', 'rain', 'rain', 'sun', 'sun', 'rain', 'rain', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'sun', 'rain', 'rain', 'rain', 'rain', 'sun', 'rain', 'rain', 'sun', 'sun', 'rain', 'sun', 'sun', 'sun', 'sun', 'rain', 'rain', 'rain', 'sun', 'rain', 'rain', 'sun', 'sun', 'sun', 'rain', 'rain', 'rain', 'sun', 'rain', 'sun', 'rain', 'rain', 'sun', 'rain', 'rain']
+$ python markov_chain/model.py
+
+Numero de muestras: 50
+rain -> rain -> rain -> sun -> rain -> sun -> rain -> sun -> rain -> rain -> rain -> rain -> rain -> sun -> sun -> sun -> sun -> sun -> sun -> sun -> sun -> rain -> rain -> sun -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun -> sun -> sun -> rain -> rain -> rain -> rain -> rain -> sun -> sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
 ```
 
 ### Hidden Markov Model
@@ -35,6 +37,14 @@ $ python markov_chain/model.py
 ```python
 $ python hmm/model.py
 
-(1, 9, 1)
-[('umbrella', 'rain'), ('umbrella', 'rain'), ('no_umbrella', 'sun'), ('umbrella', 'rain'), ('umbrella', 'rain'), ('umbrella', 'rain'), ('umbrella', 'rain'), ('no_umbrella', 'sun'), ('no_umbrella', 'sun')]
+Dimensiones del array de observaciones: (1, 9, 1)
+umbrella -> rain
+umbrella -> rain
+no_umbrella -> sun
+umbrella -> rain
+umbrella -> rain
+umbrella -> rain
+umbrella -> rain
+no_umbrella -> sun
+no_umbrella -> sun
 ```
