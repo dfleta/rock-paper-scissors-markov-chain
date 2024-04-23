@@ -25,6 +25,7 @@ o
 
 ### Markov Chain
 
+
 ```python
 $ python markov_chain/model.py
 
@@ -37,7 +38,9 @@ sun -> sun -> rain -> rain -> rain -> rain -> rain -> sun ->
 sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
 ```
 
-### Hidden Markov Model
+
+### Hidden Markov Model
+
 
 ```python
 $ python hmm/model.py
