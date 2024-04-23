@@ -29,7 +29,12 @@ o
 $ python markov_chain/model.py
 
 Numero de muestras: 50
-rain -> rain -> rain -> sun -> rain -> sun -> rain -> sun -> rain -> rain -> rain -> rain -> rain -> sun -> sun -> sun -> sun -> sun -> sun -> sun -> sun -> rain -> rain -> sun -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun -> sun -> sun -> rain -> rain -> rain -> rain -> rain -> sun -> sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
+rain -> rain -> rain -> sun -> rain -> sun -> rain -> sun ->
+rain ->rain -> rain -> rain -> rain -> sun -> sun -> sun ->
+sun -> sun -> sun -> sun -> sun -> rain -> rain -> sun -> 
+sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun -> 
+sun -> sun -> rain -> rain -> rain -> rain -> rain -> sun ->
+sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
 ```
 
 ### Hidden Markov Model
