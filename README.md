@@ -60,7 +60,22 @@ sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
 
 ### Hidden Markov Model
 
+En muchas ocasiones el estado del mundo es desconocido, pero de algún modo el agente inteligente es capaz de percibir información sobre el mundo mediante sus sensores. A partir de estas observaciones podemos inferir determinados aspectos del estado oculto, ya que dicho estado oculto influencia las observaciones.
 
+Vamos a construir un modelo oculto de Markov en el que deduciremos el estado del tiempo en función de las observaciones que realiza nuestro agente inteligente sobre si las personas que entran en un edificio portan paragüas.
+
+
+Las probabilidades de emisión son las siguientes:
+
+| Estado| Observación|       |
+| :---: | :---:      | :---: |
+|       |  paragüas  | sin paragüas |
+| sol   |  0.2	     |  0.8  |
+| lluvia|  0.9       |  0.1  |
+
+Estas probabilidades de emisión dependen únicamente del estado del tiempo hoy. 
+
+Proporcionamos al modelo una serie de observaciones y nos devuelve la secuencia de estados más probable (la explicación más probable).
 
 ```python
 $ python hmm/model.py
