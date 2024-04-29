@@ -94,7 +94,7 @@ no_umbrella -> sun
 
 ## Matemática de los Hidden Markov Models
 
-Si $ X_i $ son los estados ocultos y $ Z_i $ son las emisiones, las expresiones de la teoría de probabilidad que conforman los parámetros de entrada de nuestro modelo son:
+Si $X_i$ son los estados ocultos y $Z_i$ son las emisiones, las expresiones de la teoría de probabilidad que conforman los parámetros de entrada de nuestro modelo son:
 
 [1] **Regla de Bayes**:
 
@@ -109,3 +109,24 @@ donde $ P(X_2|X_1) $ es la distribución de probabilidad del siguiente estado.
 [3] Necesitamos la(s) distribuciones de **probabilidad**(es) del estado(s) **inicial**(es):
 
 $$ P(X_0) $$
+
+### Ejercicio
+
+Aplicando las expresiones [1], [2] y [3] del epígrafe anterior, resuelve el siguiente problema.
+
+Se trata de uno de los problemas propuestos en el MOCC sobre IA por Sebastian Thrun para explicar cómo se calculan las probabilidades de los estados ocultos dadas las observaciones.
+
+Supongamos que queremos construir un modelo oculto de Markov para calcular el estado del tiempo en función del estado de humor de la población. En función de las observaciones sobre si la gente está feliz o gruñona deduciremos las probabilidades de que el día esté soleado o lluvioso.
+
+En la figura se describen las probabilidades de transición entre los estados _Rainy_ $R$ y _Sunny_ $S$. Se proporcionan también las probabilidades de las emisiones _Happy_ $H$ y _Grumpy_ $G$. 
+
+![modelo de transicion y de emisiones](./doc/HMM_ejercicio.png "modelo de transicion y de emisiones")
+
+Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta  ese día $H_1$, dadas las probabilidades iniciales de los estados:
+
+$$ P(R_0) = 1 $$
+$$ P(S_0) = 0 $$
+
+como se indica en la figura:
+
+![](./doc/HMM_ejercicio_probabilidades.png)
