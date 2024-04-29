@@ -52,6 +52,7 @@ print(f'Dimensiones del array de observaciones: {X.shape}')
 
 # Predecir el estado oculto, el estado del clima
 y_hat = model.predict(X)
+# tensor([[1, 1, 0, 1, 1, 1, 1, 0, 0]])
 
 hmm_predictions = ["sun" if y.item() == 0 else "rain" for y in y_hat[0]]
 

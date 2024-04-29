@@ -25,6 +25,26 @@ o
 
 ### Markov Chain
 
+Vamos a construir una cadena de Markov donde las variables aleatorias siguen la suposición de Markov: el estado actual depende sólo de un número finito de estados previos.
+
+Supongamos que podemos definir la probabilidad de que mañana sea un dia soleado o llueva en función de cómo está el tiempo hoy. 
+
+Definimos el modelo de transición de nuestro ejemplo de este modo:
+
+Probabilidades iniciales de lluvia (R) y sol (S) en el primer día de la serie:
+
+$$ P(R_0) = 0.5 $$
+$$ P(S_0) = 0.5 $$
+
+El modelo de transiciones es este:
+
+|  Hoy  | Mañana|       |
+| :---: | :---: | :---: |
+|       |  sol  | lluvia|
+| sol   |  0.8	|  0.2  |
+| lluvia|  0.3  |   0.7 |
+
+Calculamos un posible serie de predicciones sobre el estado del tiempo dadas la probabilidades iniciales y el modelo de transiciones:
 
 ```python
 $ python markov_chain/model.py
@@ -38,8 +58,8 @@ sun -> sun -> rain -> rain -> rain -> rain -> rain -> sun ->
 sun -> rain -> sun -> sun -> sun -> rain -> rain -> rain -> sun -> sun
 ```
 
-
 ### Hidden Markov Model
+
 
 
 ```python
