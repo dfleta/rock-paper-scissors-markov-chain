@@ -91,3 +91,21 @@ umbrella -> rain
 no_umbrella -> sun
 no_umbrella -> sun
 ```
+
+## Matemática de los Hidden Markov Models
+
+Si $ X_i $ son los estados ocultos y $ Z_i $ son las emisiones, las expresiones de la teoría de probabilidad que conforman los parámetros de entrada de nuestro modelo son:
+
+[1] **Regla de Bayes**:
+
+$$ P(X_1 | Z_1) = \frac {P(Z_1 | X_1) P(X_1)} {P(Z_1)} = \alpha P(Z_1 | X_1) P(X_1) $$
+
+[2] **Probabilidad total**:
+
+$$ P(X_2) = \sum_{X_1} P(X_1)P(X_2|X_1) $$
+
+donde $ P(X_2|X_1) $ es la distribución de probabilidad del siguiente estado.
+
+[3] Necesitamos la(s) distribuciones de **probabilidad**(es) del estado(s) **inicial**(es):
+
+$$ P(X_0) $$
