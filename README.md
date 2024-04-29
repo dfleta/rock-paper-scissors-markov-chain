@@ -69,7 +69,7 @@ Las probabilidades de emisión son las siguientes:
 
 | Estado| Observación|       |
 | :---: | :---:      | :---: |
-|       |  paragüas  | sin paragüas |
+|       |  paraguas ![](./paraguas.png)  | sin paraguas ![](./no_paraguas.png) |
 | sol   |  0.2	     |  0.8  |
 | lluvia|  0.9       |  0.1  |
 
