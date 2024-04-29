@@ -122,7 +122,7 @@ En la figura se describen las probabilidades de transición entre los estados _R
 
 ![modelo de transicion y de emisiones](./doc/HMM_ejercicio.png "modelo de transicion y de emisiones")
 
-Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta  ese día $H_1$, dadas las probabilidades iniciales de los estados:
+Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$, dadas las probabilidades iniciales de los estados:
 
 $$ P(R_0) = 1 $$
 $$ P(S_0) = 0 $$
@@ -130,3 +130,53 @@ $$ P(S_0) = 0 $$
 como se indica en la figura:
 
 ![](./doc/HMM_ejercicio_probabilidades.png)
+
+#### Solución
+
+En la regla de Bayes [1] sustituímos el estado oculto $X_i$ por el estado $R_1$ y la emisión u observación $Z_i$ por $H_1$:
+
+$$ P(X_1 | Z_1) = \frac {P(Z_1 | X_1) P(X_1)} {P(Z_1)} $$
+
+
+$$ P(R_1|H_1) = \frac {P(H_1 | R_1) P(R_1)} {P(H_1)} $$
+
+Debemos calcular, por tanto, las probalidades:
+
+* $P(H_1 | R_1)$
+* $P(R_1)$
+* $P(H_1)$
+
+##### $P(H_1 | R_1)$
+
+La probabilidad de que la gente sea feliz si el día es lluvioso, o $P(H_1 | R_1)$, se lee directamente en la figura: $0.4$
+
+##### $P(R_1)$
+
+Para el cálculo de la probabilidad de que el día 1 sea lluvioso $P(R_1)$ usamos el teorema de la probilidad total [2]:
+
+$$ P(X_2) = \sum_{X_1} P(X_1) P(X_2|X_1) $$
+
+$$ P(R_1) = P(R_1|R_0) P(R_0) + P(R_1|S_0) P(S_0) = 0.6 \times 0.5 + 0.2 \times 0.5 = 0.4 $$
+
+extrayendo las probabilidades de transición entre los estados $R$ y $S$ directamente de la figura, y sustituyendo las probabilidades iniciales por los valores proporcionados $P(R_0) = 1$, 
+$P(S_0) = 0$, que corresponden al parámetro de entrada [3] de nuestro modelo.
+
+##### $P(H_1)$
+
+La probablidad de que en el día 1 la gente esté feliz $H_1$ se calcula a través de la probabilidad total [2]:
+
+$$ P(H_1) = P(H_1|R_1) P(R_1) + P(H_1|S_1) P(S_1) = 0.4 \times P(R_1) + 0.9 \times P(S_1) $$
+
+La probabilidad $P(R_1)$ la hemos calculado anteriormente: $P(R_1)=0.4$
+
+Necesitamos calcular la probabilidad total de que el día 1 sea soleado $P(S_1)$:
+
+$$ P(S_1) = P(S_1|S_0) P(S_0) + P(S_1|R_0) P(R_0) = 0.8 \times 0.5 + 0.4 \times 0.5 = 0.6 $$
+
+que introducida en la expresión $P(H_1)$ ofrece:
+
+$$ P(H_1) = 0.4 \times 0.4 + 0.9 \times 0.6 = 0.7 $$
+
+Disponemos ya de todos las probabilidades para sustituir en la expresión:
+
+$$ P(R_1|H_1) = \frac {P(H_1 | R_1) P(R_1)} {P(H_1)} =   \frac {0.4 \times 0.4} {0.7} = 0.229 $$
