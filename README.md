@@ -104,9 +104,9 @@ $$ P(X_1 | Z_1) = \frac {P(Z_1 | X_1) P(X_1)} {P(Z_1)} = \alpha P(Z_1 | X_1) P(X
 
 $$ P(X_2) = \sum_{X_1} P(X_1)P(X_2|X_1) $$
 
-donde $ P(X_2|X_1) $ es la distribución de probabilidad del siguiente estado.
+donde $P(X_2|X_1)$ es la distribución de probabilidad del siguiente estado.
 
-[3] Necesitamos la(s) distribuciones de **probabilidad**(es) del estado(s) **inicial**(es):
+[3] La(s) distribuciones de **probabilidad**(es) del(os) estado(s) **inicial**(es):
 
 $$ P(X_0) $$
 
@@ -124,12 +124,12 @@ En la figura se describen las probabilidades de transición entre los estados _R
 
 Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$, dadas las probabilidades iniciales de los estados:
 
-$$ P(R_0) = 1 $$
-$$ P(S_0) = 0 $$
+$$ P(R_0) = 1/2 $$
+$$ P(S_0) = 1/2 $$
 
 como se indica en la figura:
 
-![](./doc/HMM_ejercicio_probabilidades.png)
+!["Ejercicio probabilidades enunciado"](./doc/HMM_ejercicio_probabilidades_enunciado.png "Ejercicio probabilidades enunciado")
 
 #### Solución
 
@@ -180,3 +180,7 @@ $$ P(H_1) = 0.4 \times 0.4 + 0.9 \times 0.6 = 0.7 $$
 Disponemos ya de todos las probabilidades para sustituir en la expresión:
 
 $$ P(R_1|H_1) = \frac {P(H_1 | R_1) P(R_1)} {P(H_1)} =   \frac {0.4 \times 0.4} {0.7} = 0.229 $$
+
+Observa los números en la figura:
+
+!["Ejercicio probabilidades resuelto"](./doc/HMM_ejercicio_probabilidades_solucion.png "Ejercicio probabilidades resuelto")
