@@ -122,14 +122,19 @@ En la figura se describen las probabilidades de transición entre los estados _R
 
 ![modelo de transicion y de emisiones](./doc/HMM_ejercicio.png "modelo de transicion y de emisiones")
 
-Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$, dadas las probabilidades iniciales de los estados:
+Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$:
+
+$$ P(R_1|H_1)  $$
+
+dadas las probabilidades iniciales de los estados:
 
 $$ P(R_0) = 1/2 $$
 $$ P(S_0) = 1/2 $$
 
+Dispones de este ejercicio resuelto en este vídeo, 
 como se indica en la figura:
 
-!["Ejercicio probabilidades enunciado"](./doc/HMM_ejercicio_probabilidades_enunciado.png "Ejercicio probabilidades enunciado")
+[!["Ejercicio probabilidades enunciado"](./doc/HMM_ejercicio_probabilidades_enunciado.png "Ejercicio probabilidades enunciado")](https://drive.google.com/file/d/1b_URIpShIw3ta1TGi5a6VJa2A9dZXeTn/view?usp=drive_link)
 
 #### Solución
 
@@ -233,6 +238,7 @@ En estos casos, podemos recurrir a los _Hidden Markov Models_ (HMM) y a las Cade
 ¿Qué es la maximización de la probabilidad?
 
 Intentarmos calcular la probabilidad de cada posible transición:
+
 ```
     Rain -> Sun
     Rain -> Rain 
@@ -242,11 +248,23 @@ Intentarmos calcular la probabilidad de cada posible transición:
 
 Para calcular estas probabilidades, muestreamos una secuencia de transiciones y calculamos la probabilidad de la transición entre cada estado basándonos en los datos muestreados. Esta es la **matriz de transiciones**.
 
-Hacemos el cálculo "a mano" y luego usaremos el código en [model_probabilities.py](./markov_chain/model_probabilities.py).
+Realizamos el cálculo "a mano" y luego usaremos el código en [model_probabilities.py](./markov_chain/model_probabilities.py).
 
 #### A mano
 
- $R \ R \ S \ S \ R \ S \ R \ S \ R \ R$
+Dispones del enunciado de este ejercicio en este vídeo:
+
+[![enunciado ejercicio](./doc/Cadena_Markov_enunciado.png "vídeo enunciado ejercicio")](https://drive.google.com/file/d/1Ze-y2KeyyyyijBohNtaecglp7s7As249/view?usp=drive_link) 
+
+y de la solución en este otro:
+
+[![solución ejercicio](./doc/Cadena_Markov_solucion.png "vídeo solución ejercicio")](https://drive.google.com/file/d/1AQRgthFL3KpLKfa5LKqEjEq_zy1JDS06/view?usp=drive_link) 
+
+si estás logueado con la cuenta del módulo de MIA.
+
+La secuencia de observaciones es:
+
+$R \ R \ S \ S \ R \ S \ R \ S \ R \ R$
 
 Contamos "a mano" el número de transiciones que se presentan en las observaciones y las expresamos en términos de probabilidad condicionada $P(A|B)$ que, en las cadenas de Markov es la probabilidad de transición $P(X_n | X_{n-1})$.
 
@@ -309,7 +327,7 @@ samples = [ [[1], [1]],
 X = torch.tensor(samples)
 ```
 
-Establecemos la dependencia únicamente al estado anterior:
+Establecemos la dependencia únicamente al estado anterior `k=1`:
 
 ```python
 model_ejercicio = MarkovChain(k=1)
