@@ -110,7 +110,7 @@ donde $P(X_2|X_1)$ es la distribución de probabilidad del siguiente estado.
 
 $$ P(X_0) $$
 
-### Ejercicio
+### Ejercicio HMM
 
 Aplicando las expresiones [1], [2] y [3] del epígrafe anterior, resuelve el siguiente problema.
 
@@ -122,14 +122,19 @@ En la figura se describen las probabilidades de transición entre los estados _R
 
 ![modelo de transicion y de emisiones](./doc/HMM_ejercicio.png "modelo de transicion y de emisiones")
 
-Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$, dadas las probabilidades iniciales de los estados:
+Se pide calcular la probabilidad de que el día 1 sea lluvioso $R_1$ en función de que la observación arroje que la gente está contenta ese día $H_1$:
+
+$$ P(R_1|H_1)  $$
+
+dadas las probabilidades iniciales de los estados:
 
 $$ P(R_0) = 1/2 $$
 $$ P(S_0) = 1/2 $$
 
+Dispones de este ejercicio resuelto en este vídeo, 
 como se indica en la figura:
 
-!["Ejercicio probabilidades enunciado"](./doc/HMM_ejercicio_probabilidades_enunciado.png "Ejercicio probabilidades enunciado")
+[!["Ejercicio probabilidades enunciado"](./doc/HMM_ejercicio_probabilidades_enunciado.png "Ejercicio probabilidades enunciado")](https://drive.google.com/file/d/1b_URIpShIw3ta1TGi5a6VJa2A9dZXeTn/view?usp=drive_link)
 
 #### Solución
 
@@ -184,3 +189,180 @@ $$ P(R_1|H_1) = \frac {P(H_1 | R_1) P(R_1)} {P(H_1)} =   \frac {0.4 \times 0.4} 
 Observa los números en la figura:
 
 !["Ejercicio probabilidades resuelto"](./doc/HMM_ejercicio_probabilidades_solucion.png "Ejercicio probabilidades resuelto")
+
+## Matemática de las Cadenas de Markov
+
+Un proceso de Markov es un proceso aleatorio con la propiedad de que dado el valor actual del proceso $X_t$, los valores futuros $X_s$ para $s > t$ son independientes de los valores pasados $X_u$ para $u < t$. Si disponemos de la información presente del proceso, conocer cómo ha llegado  al estado actual no afecta las probabilidades de pasar a otro estado en el futuro. 
+
+Así, una secuencia de variables aleatorias $X_n$ es una cadena de Markov chain si posee la propiedad de que:
+
+$$ P(X_n = j | valores \ de \ los \ estados \ previos) = P(X_n | X_{n-1}) $$
+
+que expresada de otro modo:
+
+$$ [1] \quad P(X_{n+1} = j|X_0 = i_0 , ..., X_{n−1} = i_{n−1},X_n = i_n) = P(X_{n+1} = j|X_n = i_n) $$
+
+para todo $n$ y cualesquiera estados $i_0, i_1, . . . , i_n, j$ en $\varepsilon$. La propiedad [1] se conoce como la propiedad de Markov.
+
+es decir, sólo el último estado determina la probabilidad del estado actual. 
+
+Las probabilidades $P(X_n | X_{n-1})$ son las **probabilidades de transición**. Las variables serán siempre **discretas** y asumiremos que toman valores en un **conjunto finito** o numerable $\varepsilon$, conocido como **espacio de estados**.
+
+### Cadenas de Markov estacionarias
+
+Cuando estas probabilidades son independientes del tiempo (de $n$) la cadena posee **probabilidades de transición estacionarias** (homogéneas) en el tiempo.
+
+Así, si la probabilidad de que $X_{n+1}$ esté en el estado $j$ dado que $X_n$ está en el estado $i$ es la **probabilidad de transición** en un paso de $i$ a $j$ y la denotamos por $P^{nn+1}_{ij}$:
+
+$ P^{nn+1}_{ij} = P(X_{n+1} = j|X_{n = i}) $
+
+En este caso $P^{nn+1}_{ij} = P_{ij}$ no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i4 al estado $j$ en un paso.
+
+
+### Ejercicio Cadenas de Markov
+
+Supongamos que en nuestro ejercicio del clima hemos observado la siguiente secuencia de observaciones:
+
+Numero de muestras: 10
+
+rain -> rain -> sun -> sun -> rain -> sun -> rain -> sun -> rain -> rain
+
+Abrevianos la notación de la forma: $R \ R \ S \ S \ R \ S \ R \ S \ R \ R$
+
+**Recuerda que se cumple la propiedad de Markov.**
+
+En el mundo de la ciencia de datos, existe una tendencia a emplear aproximaciones a este tipo de problemas de entradas secuenciales usando técnicas de _machine learning_ para encontrar las relaciones en el conjunto de datos -por ejemplo las _Long Short Term Memory Networks_ (LSTM), que son un tipo de redes neuronales recurrentes (RNN)-, pero en muchos casos, no disponemos de una cantidad de muestras significativas o las secuencias son demasiado largas para entrenar una RNN de manera efectiva. 
+
+En estos casos, podemos recurrir a los _Hidden Markov Models_ (HMM) y a las Cadenas de Markov. Ambos métodos proveen de una aproximación "ligera" pero robusta que utiliza estadística y distribuciones usando la **maximización de la probabilidad**. 
+
+¿Qué es la maximización de la probabilidad?
+
+Intentarmos calcular la probabilidad de cada posible transición:
+
+```
+    Rain -> Sun
+    Rain -> Rain 
+    Sun -> Rain
+    Sun -> Sun
+```
+
+Para calcular estas probabilidades, muestreamos una secuencia de transiciones y calculamos la probabilidad de la transición entre cada estado basándonos en los datos muestreados. Esta es la **matriz de transiciones**.
+
+Realizamos el cálculo "a mano" y luego usaremos el código en [model_probabilities.py](./markov_chain/model_probabilities.py).
+
+#### A mano
+
+Dispones del enunciado de este ejercicio en este vídeo:
+
+[![enunciado ejercicio](./doc/Cadena_Markov_enunciado.png "vídeo enunciado ejercicio")](https://drive.google.com/file/d/1Ze-y2KeyyyyijBohNtaecglp7s7As249/view?usp=drive_link) 
+
+y de la solución en este otro:
+
+[![solución ejercicio](./doc/Cadena_Markov_solucion.png "vídeo solución ejercicio")](https://drive.google.com/file/d/1AQRgthFL3KpLKfa5LKqEjEq_zy1JDS06/view?usp=drive_link) 
+
+si estás logueado con la cuenta del módulo de MIA.
+
+La secuencia de observaciones es:
+
+$R \ R \ S \ S \ R \ S \ R \ S \ R \ R$
+
+Contamos "a mano" el número de transiciones que se presentan en las observaciones y las expresamos en términos de probabilidad condicionada $P(A|B)$ que, en las cadenas de Markov es la probabilidad de transición $P(X_n | X_{n-1})$.
+
+Probabilidad inicial:
+
+- $P(R_0) = 1$ pues la secuencia de observaciones comienza en $R$.
+
+Las probabilidades de transición desde $S$ son:
+
+- $P(S|S) = 1/4 = 0.25$ pues observamos 4 dias soleados y sólo 1 en el que el siguiente es soleado.
+
+- $P(R|S) = 3/4 = 0.75$ pues observamos 4 dias soleados y 3 en el que el siguiente es lluvioso.
+
+Las probabilidades de transición desde $R$ son:
+
+- $P(S|R) = 3/6 = 0.5$ pues observamos 6 dias lluviosos y 3 transiciones a día soleado.
+
+- $P(R|R) = 3/6 = 0.5$ pues observamos 6 dias lluviosos y 3 transiciones a día lluvioso.
+
+La matriz de transiciones sería, por tanto:
+
+$$
+P = 
+\begin{bmatrix}
+0.25 & 0.75\\[0.3em]
+0.5 & 0.5 \\[0.3em]
+\end{bmatrix}
+$$
+
+o lo que es lo mismo:
+
+|  Hoy  | Mañana|       |
+| :---: | :---: | :---: |
+|       |  sol  | lluvia|
+| sol   |  0.25	|  0.75 |
+| lluvia|  0.5 | 0.5   |
+
+
+#### model_probabilites.py
+
+Consulta el código en [model_probabilities.py](./markov_chain/model_probabilities.py).
+
+Expresamos las observaciones: 
+
+`R R S S R S R S R R`
+
+como un tensor:
+
+```python
+samples = [ [[1], [1]],
+            [[1], [1]],
+            [[1], [0]],
+            [[0], [0]],
+            [[0], [1]],
+            [[1], [0]],
+            [[0], [1]],
+            [[1], [0]],
+            [[0], [1]],
+            [[1], [1]]]
+X = torch.tensor(samples)
+```
+
+Establecemos la dependencia únicamente al estado anterior `k=1`:
+
+```python
+model_ejercicio = MarkovChain(k=1)
+model_ejercicio.fit(X)
+```
+
+Las probabilidades iniciales o Categorical son:
+
+```python
+model_ejercicio.distributions[0].probs[0]
+
+>>> tensor([0.4000, 0.6000])
+```
+
+y la matriz de transición o probabilidades condicionadas son:
+
+```python
+model_ejercicio.distributions[1].probs[0]
+
+>>> tensor([[0.2500, 0.7500],
+            [0.5000, 0.5000]])
+```
+que coincide con la matriz de transiciones calculada anteriormente "a mano":
+
+$$
+P = 
+\begin{bmatrix}
+0.25 & 0.75\\[0.3em]
+0.5 & 0.5 \\[0.3em]
+\end{bmatrix}
+$$
+
+
+## Bibliografia
+
+[Forsyth, David. _Probability and Statistics for Computer Science_. Springer International Publishing AG, 2018](https://github.com/clementinojr/Springer-s-Books)
+
+"A brief primer on Hidden Markov Models", _Berkeley D-Lab_, 3 de mayo de 2024. https://dlab.berkeley.edu/news/brief-primer-hidden-markov-models
