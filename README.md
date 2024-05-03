@@ -68,7 +68,7 @@ Vamos a construir un modelo oculto de Markov en el que deduciremos el estado del
 Las probabilidades de emisión son las siguientes:
 
 | Estado| Observación|       |
-| :---: | :---:      | :---: |
+| :---: | :---------:| :---: |
 |       |  paraguas ![](./doc/paraguas.png)  | sin paraguas ![](./doc/no_paraguas.png) |
 | sol   |  0.2	     |  0.8  |
 | lluvia|  0.9       |  0.1  |
@@ -289,8 +289,8 @@ La matriz de transiciones sería, por tanto:
 $$
 P = 
 \begin{bmatrix}
-0.25 & 0.75\\[0.3em]
-0.5 & 0.5 \\[0.3em]
+0.25 & 0.75\\
+0.5 & 0.5 \\
 \end{bmatrix}
 $$
 
@@ -299,8 +299,8 @@ o lo que es lo mismo:
 |  Hoy  | Mañana|       |
 | :---: | :---: | :---: |
 |       |  sol  | lluvia|
-| sol   |  0.25	|  0.75 |
-| lluvia|  0.5 | 0.5   |
+| sol   |  0.25	| 0.75 |
+| lluvia|  0.5  | 0.5   |
 
 
 #### model_probabilites.py
@@ -352,11 +352,11 @@ model_ejercicio.distributions[1].probs[0]
 ```
 que coincide con la matriz de transiciones calculada anteriormente "a mano":
 
-$$
+$$ 
 P = 
 \begin{bmatrix}
-0.25 & 0.75\\[0.3em]
-0.5 & 0.5 \\[0.3em]
+0.25 & 0.75\\
+0.5 & 0.5 \\
 \end{bmatrix}
 $$
 
