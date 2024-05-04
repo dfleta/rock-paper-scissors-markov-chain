@@ -194,7 +194,7 @@ Observa los números en la figura:
 
 Un proceso de Markov es un proceso aleatorio con la propiedad de que dado el valor actual del proceso $X_t$, los valores futuros $X_s$ para $s > t$ son independientes de los valores pasados $X_u$ para $u < t$. Si disponemos de la información presente del proceso, conocer cómo ha llegado  al estado actual no afecta las probabilidades de pasar a otro estado en el futuro. 
 
-Así, una secuencia de variables aleatorias $X_n$ es una cadena de Markov chain si posee la propiedad de que:
+Así, una secuencia de variables aleatorias $X_n$ es una cadena de Markov si posee la propiedad de que:
 
 $$ P(X_n = j | valores \ de \ los \ estados \ previos) = P(X_n | X_{n-1}) $$
 
@@ -204,7 +204,7 @@ $$ [1] \quad P(X_{n+1} = j|X_0 = i_0 , ..., X_{n−1} = i_{n−1},X_n = i_n) = P
 
 para todo $n$ y cualesquiera estados $i_0, i_1, . . . , i_n, j$ en $\varepsilon$. La propiedad [1] se conoce como la propiedad de Markov.
 
-es decir, sólo el último estado determina la probabilidad del estado actual. 
+Es decir, sólo el último estado determina la probabilidad del estado actual. 
 
 Las probabilidades $P(X_n | X_{n-1})$ son las **probabilidades de transición**. Las variables serán siempre **discretas** y asumiremos que toman valores en un **conjunto finito** o numerable $\varepsilon$, conocido como **espacio de estados**.
 
@@ -216,7 +216,7 @@ Así, si la probabilidad de que $X_{n+1}$ esté en el estado $j$ dado que $X_n$ 
 
 $ P^{nn+1}_{ij} = P(X_{n+1} = j|X_{n = i}) $
 
-En este caso $P^{nn+1}_{ij} = P_{ij}$ no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i4 al estado $j$ en un paso.
+En este caso $P^{nn+1}_{ij} = P_{ij}$ no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i$ al estado $j$ en un paso.
 
 
 ### Ejercicio Cadenas de Markov
@@ -231,7 +231,7 @@ Abrevianos la notación de la forma: $R \ R \ S \ S \ R \ S \ R \ S \ R \ R$
 
 **Recuerda que se cumple la propiedad de Markov.**
 
-En el mundo de la ciencia de datos, existe una tendencia a emplear aproximaciones a este tipo de problemas de entradas secuenciales usando técnicas de _machine learning_ para encontrar las relaciones en el conjunto de datos -por ejemplo las _Long Short Term Memory Networks_ (LSTM), que son un tipo de redes neuronales recurrentes (RNN)-, pero en muchos casos, no disponemos de una cantidad de muestras significativas o las secuencias son demasiado largas para entrenar una RNN de manera efectiva. 
+En el mundo de la ciencia de datos, existe una tendencia a emplear aproximaciones a este tipo de problemas de entradas secuenciales usando técnicas de _machine learning_ para encontrar las relaciones en el conjunto de datos -por ejemplo las _Long Short Term Memory Networks_ (LSTM), que son un tipo de redes neuronales recurrentes (RNN)- pero en muchos casos no disponemos de una cantidad de muestras significativas o las secuencias son demasiado largas para entrenar una RNN de manera efectiva. 
 
 En estos casos, podemos recurrir a los _Hidden Markov Models_ (HMM) y a las Cadenas de Markov. Ambos métodos proveen de una aproximación "ligera" pero robusta que utiliza estadística y distribuciones usando la **maximización de la probabilidad**. 
 
