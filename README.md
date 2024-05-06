@@ -214,7 +214,7 @@ Cuando estas probabilidades son independientes del tiempo (de $n$) la cadena pos
 
 Así, si la probabilidad de que $X_{n+1}$ esté en el estado $j$ dado que $X_n$ está en el estado $i$ es la **probabilidad de transición** en un paso de $i$ a $j$ y la denotamos por $P^{nn+1}_{ij}$:
 
-$ P^{nn+1}_{ij} = P(X_{n+1} = j|X_{n = i}) $
+$$ P^{nn+1}_{ij} = P(X_{n+1} = j|X_{n = i}) $$
 
 En este caso $P^{nn+1}_{ij} = P_{ij}$ no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i$ al estado $j$ en un paso.
 
@@ -365,14 +365,14 @@ $$
 
 Dado el vector $w = (w_1, ..., w_k)$ se llama vector de probabilidades si:
 
-* $ w_i \ge 0 $ para $i = 1, ..., k $
-* $$ \sum_{i=1}^{k} w_i = 1 $$
+$$ w_i \ge 0 \quad para \quad i = 1, ..., k $$
+$$ \sum_{i=1}^{k} w_i = 1 $$
 
-Consideremos una cadena de Markov con $ s_1, ..., s_k $ posibles estados en los que la cadena puede estar en el tiempo de observación inicial $ n = 1 $.
+Consideremos una cadena de Markov con $ s_1, ..., s_k $ posibles estados en los que la cadena puede estar en el tiempo de observación inicial $n = 1$.
 
-Para $ i = 1, ..., k $, la probabilidad de que en el instante $ X_1 $ el estado sea $ s_i $ es el vector de probabilidades $ v_i $:
+Para $i = 1, ..., k$, la probabilidad de que en el instante $X_1$ el estado sea $s_i$ es el vector de probabilidades $v_i$:
 
-$ P(X_1 = s_i) = v_i $, con $ v_i \ge 0 $ y $ v_1+ ... + v_k = 1 $
+$P(X_1 = s_i) = v_i$, con $v_i \ge 0$ y $v_1+ ... + v_k = 1$
 
 Supongamos que en nuestro ejemplo del clima, disponemos de las probabilidades de que el primer día de la serie sea soleado o nublado. Podemos expresarlas en un **vector de probailidades iniciales** de la forma:
 
@@ -382,9 +382,9 @@ En nuestro caso:
 
 $$ v = (0.5, 0.5) $$
 
-El vector de probabilidades iniciales $ v $ y la matriz de transición $ P $ determinan la probabilidad para el estado de la cadena en el segundo instante de tiempo, dada por el vector $ vP $.
+El vector de probabilidades iniciales $\vec v$ y la matriz de transición $P$ determinan la probabilidad para el estado de la cadena en el segundo instante de tiempo, dada por el vector $\vec vP$.
 
-Si las probabilidades de los diversos estados en el instante $ n $ se especifican por el vector de probabilidades $ w $, entonces las probabilidades en el instante $ n + 1 $ se especifican por el vector de probabilidades $ wP $.
+Si las probabilidades de los diversos estados en el instante $n$ se especifican por el vector de probabilidades $w$, entonces las probabilidades en el instante $n + 1$ se especifican por el vector de probabilidades $\vec wP$.
 
 Vamos a calcular estas probabilidades en nuestro ejemplo.
 
@@ -429,9 +429,9 @@ w = torch.matmul(v, P)
 # w = tensor([[0.6000, 0.4000]])
 ```
 
-La probabilidad de que el segundo dia de la serie sea soleado es $ 0.6 $ y de que sea lluvioso $ 0.4 $. 
+La probabilidad de que el segundo dia de la serie sea soleado es $0.6$ y de que sea lluvioso $0.4$. 
 
-Observa cómo se satisface el axioma de la teoría de la probabilidad que establece que la probabilidad total del conjunto de los posibles estados es $ 1 $.
+Observa cómo se satisface el axioma de la teoría de la probabilidad que establece que la probabilidad total del conjunto de los posibles estados es $1$.
 
 #### Probabilidades en el tercer día
 
