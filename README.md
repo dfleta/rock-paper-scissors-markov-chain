@@ -361,6 +361,106 @@ P =
 $$
 
 
+### Ejercicio cadena estacionaria con probabilidades iniciales
+
+Dado el vector $w = (w_1, ..., w_k)$ se llama vector de probabilidades si:
+
+* $ w_i \ge 0 $ para $i = 1, ..., k $
+* $$ \sum_{i=1}^{k} w_i = 1 $$
+
+Consideremos una cadena de Markov con $ s_1, ..., s_k $ posibles estados en los que la cadena puede estar en el tiempo de observación inicial $ n = 1 $.
+
+Para $ i = 1, ..., k $, la probabilidad de que en el instante $ X_1 $ el estado sea $ s_i $ es el vector de probabilidades $ v_i $:
+
+$ P(X_1 = s_i) = v_i $, con $ v_i \ge 0 $ y $ v_1+ ... + v_k = 1 $
+
+Supongamos que en nuestro ejemplo del clima, disponemos de las probabilidades de que el primer día de la serie sea soleado o nublado. Podemos expresarlas en un **vector de probailidades iniciales** de la forma:
+
+$$ v = (v_1, ..., vk) $$
+
+En nuestro caso:
+
+$$ v = (0.5, 0.5) $$
+
+El vector de probabilidades iniciales $ v $ y la matriz de transición $ P $ determinan la probabilidad para el estado de la cadena en el segundo instante de tiempo, dada por el vector $ vP $.
+
+Si las probabilidades de los diversos estados en el instante $ n $ se especifican por el vector de probabilidades $ w $, entonces las probabilidades en el instante $ n + 1 $ se especifican por el vector de probabilidades $ wP $.
+
+Vamos a calcular estas probabilidades en nuestro ejemplo.
+
+#### Probabilidades en el segundo día
+
+Dado el vector de probailidades iniciales:
+
+$$ \vec{v} = <0.5, 0.5> $$
+
+y la matriz de transición:
+
+$$ 
+P = 
+\begin{bmatrix}
+0.8 & 0.2\\
+0.4 & 0.6 \\
+\end{bmatrix}
+$$
+
+las probabilidades del segundo día de la serie son:
+
+$$ \vec w = \vec v  P = <0.5, 0.5> \times 
+\begin{bmatrix}
+0.8 & 0.2\\
+0.4 & 0.6 \\
+\end{bmatrix} = <0.6, 0.4> $$
+
+Para este cálculo podemos hacer uso de la librería pytorch según vemos en el fichero [`model_stationary.py`](./markov_chain/model_stationary.py):
+
+```python
+# vector de probabilidades iniciales
+v = torch.tensor([[0.5, 0.5]])
+
+# matriz de transicion
+P = torch.tensor([
+    [0.8, 0.2],
+    [0.4, 0.6]
+])
+
+# Probabilidades en el segundo dia de la serie
+w = torch.matmul(v, P)
+# w = tensor([[0.6000, 0.4000]])
+```
+
+La probabilidad de que el segundo dia de la serie sea soleado es $ 0.6 $ y de que sea lluvioso $ 0.4 $. 
+
+Observa cómo se satisface el axioma de la teoría de la probabilidad que establece que la probabilidad total del conjunto de los posibles estados es $ 1 $.
+
+#### Probabilidades en el tercer día
+
+$$ \vec u = \vec v  P \times P = \vec w \times P = <0.6, 0.4> \times 
+\begin{bmatrix}
+0.8 & 0.2\\
+0.4 & 0.6 \\
+\end{bmatrix} = <0.6400, 0.3600> $$
+
+```python
+# Probabilidades en el tercer dia de la serie
+u = torch.matmul(w, P)
+# tensor([[0.6400, 0.3600]])
+```
+
+#### Probabilidades en el cuarto día
+
+$$ \vec t = \vec v \times P^3 = \vec v P \times P^2 = \vec w \times P^2 = \vec u \times P = <0.6400, 0.3600> \times 
+\begin{bmatrix}
+0.8 & 0.2\\
+0.4 & 0.6 \\
+\end{bmatrix} = <0.6560, 0.3440> $$
+
+```python
+# Probabilidades en el cuarto dia de la serie
+t = torch.matmul(u, P)
+# t = tensor([[0.6560, 0.3440]])
+```
+
 ## Bibliografia
 
 [Forsyth, David. _Probability and Statistics for Computer Science_. Springer International Publishing AG, 2018](https://github.com/clementinojr/Springer-s-Books)
