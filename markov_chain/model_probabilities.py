@@ -30,3 +30,6 @@ print(model_ejercicio.distributions[0].probs[0])
 # Probabilidades de transición o condicionadas (ConditionalCategorical)
 print("Matriz de transicion:")
 print(model_ejercicio.distributions[1].probs[0])
+
+print("Probabilidad de la serie:")
+print(model_ejercicio.probability(X))
