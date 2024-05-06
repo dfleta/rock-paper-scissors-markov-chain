@@ -370,7 +370,7 @@ $$ \sum_{i=1}^{k} w_i = 1 $$
 
 Consideremos una cadena de Markov con $ s_1, ..., s_k $ posibles estados en los que la cadena puede estar en el tiempo de observación inicial $n = 1$.
 
-Para $i = 1, ..., k$, la probabilidad de que en el instante $X_1$ el estado sea $s_i$ es el vector de probabilidades $v_i$:
+Para $i = 1,...,k$, la probabilidad de que en el instante $X_1$ el estado sea $s_i$ es el vector de probabilidades $v_i$:
 
 $P(X_1 = s_i) = v_i$, con $v_i \ge 0$ y $v_1+ ... + v_k = 1$
 
