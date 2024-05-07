@@ -5,8 +5,8 @@ import torch
 
 '''
 La probabilidad de encender el robot y que se encuentre
-en cada una de las salas del museo al comenzar el día es la misma.
-Una vez encendido el robot, se mueve a una sala contigua
+en cada una de las habitaciones de la casa al comenzar el día es la misma.
+Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con igual probabilidad.
 '''
 
@@ -57,3 +57,9 @@ print(f'u = {u}')
 # Probabilidades en el cuarto dia de la serie
 t = torch.matmul(u, P)
 print(f't = {t}')
+
+'''
+w = tensor([0.2222, 0.1389, 0.1389, 0.1389, 0.1389, 0.2222])
+u = tensor([0.2130, 0.1435, 0.1435, 0.1435, 0.1435, 0.2130])
+t = tensor([0.2145, 0.1427, 0.1427, 0.1427, 0.1427, 0.2145])
+'''
