@@ -216,7 +216,7 @@ Así, si la probabilidad de que $X_{n+1}$ esté en el estado $j$ dado que $X_n$ 
 
 $$ P^{nn+1}_{ij} = P(X_{n+1} = j | X_n = i) $$
 
-En este caso, $P^{nn+1}_{ij} = P_{ij} $, no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i$ al estado $j$ en un paso.
+En este caso, $P^{nn+1}_{ij}=P_{ij}$, no depende de $n$ y $P_{ij}$ es la probabilidad de que la cadena pase del estado $i$ al estado $j$ en un paso.
 
 
 ### Ejercicio Cadenas de Markov
