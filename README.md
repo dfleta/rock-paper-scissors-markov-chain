@@ -412,7 +412,7 @@ $$ \vec w = \vec v  P = <0.5, 0.5> \times
 0.4 & 0.6 \\
 \end{bmatrix} = <0.6, 0.4> $$
 
-Para este cálculo podemos hacer uso de la librería pytorch según vemos en el fichero [`model_stationary.py`](./markov_chain/model_stationary.py):
+Para este cálculo podemos hacer uso de la librería pytorch según vemos en el script [`model_stationary.py`](./markov_chain/model_stationary.py) o en [`model_stationary_markov_chain`](./markov_chain/model_stationary_markov_chain.py).
 
 ```python
 # vector de probabilidades iniciales
