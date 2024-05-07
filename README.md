@@ -461,6 +461,10 @@ t = torch.matmul(u, P)
 # t = tensor([[0.6560, 0.3440]])
 ```
 
+### Ejercicio robot guía museo
+
+En los _scripts_ [`model_robot_0x.py`](./markov_chain/model_robot_01.py) encontrarás el código correspondiente a una cadena de Markov estacionario que modela el posible movimiento de un robot guía de museo.
+
 ## Bibliografia
 
 [Forsyth, David. _Probability and Statistics for Computer Science_. Springer International Publishing AG, 2018](https://github.com/clementinojr/Springer-s-Books)
