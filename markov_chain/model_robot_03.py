@@ -4,8 +4,8 @@ from pomegranate.markov_chain import MarkovChain
 import torch
 
 '''
-La probabilidad de encender el robot y que se encuentre
-en cada una de las habitaciones del museo al comenzar el día es la misma.
+La probabilidad de encender el robot aspirador y que se encuentre
+en cada una de las habitaciones de la casa al comenzar el día es la misma.
 Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con probabilidad proporcional
 al número de la celda.

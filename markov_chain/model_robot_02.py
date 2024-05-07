@@ -4,7 +4,7 @@ from pomegranate.markov_chain import MarkovChain
 import torch
 
 '''
-Cambiamos ahora las probabilidades iniciales al encender el robot.
+Cambiamos ahora las probabilidades iniciales al encender el robot aspirador.
 Las probabilidades de comenzar el día en una habitación u otra son distintas.
 Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con igual probabilidad.
