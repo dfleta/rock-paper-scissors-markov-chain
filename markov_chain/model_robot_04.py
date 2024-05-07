@@ -4,7 +4,7 @@ from pomegranate.markov_chain import MarkovChain
 import torch
 
 '''
-Encendemos el robot asporador y lo colocamos en la habitación 1.
+Encendemos el robot aspirador y lo colocamos en la habitación 1.
 Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con igual probabilidad.
 Es de esperar que las probabilidades de aspirar las habitaciones

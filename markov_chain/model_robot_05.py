@@ -4,30 +4,32 @@ from pomegranate.markov_chain import MarkovChain
 import torch
 
 '''
-La probabilidad de encender el robot aspirador y que se encuentre
-en cada una de las habitaciones de la casa al comenzar el día es la misma.
+Encendemos el robot aspirador y lo colocamos en la habitación 1.
 Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con igual probabilidad.
+Ahora, las habitaciones 2 y 3, y 4 y 5 están conectadas.
+Sin embargo, a la habitación 6 sólo puede accederse
+desde la habitación 3.
 '''
 
 # Probabilidades iniciales
 start = Categorical([[
-    1/6,
-    1/6,
-    1/6,
-    1/6,
-    1/6,
-    1/6
+    1.0,
+    0,
+    0,
+    0,
+    0,
+    0
 ]])
 
 # Modelo de transicion
 transitions = ConditionalCategorical([[
     [1/3, 1/3, 0, 1/3, 0, 0],
-    [1/2, 1/2, 0, 0, 0, 0],
-    [0, 0, 1/2, 0, 0, 1/2],
-    [1/2, 0, 0, 1/2, 0, 0],
-    [0, 0, 0, 0, 1/2, 1/2],
-    [0, 0, 1/3, 0, 1/3, 1/3]
+    [1/3, 1/3, 1/3, 0, 0, 0],
+    [0, 1/3, 1/3, 0, 0, 1/3],
+    [1/3, 0, 0, 1/3, 1/3, 0],
+    [0, 0, 0, 1/2, 1/2, 0],
+    [0, 0, 1/3, 0, 0, 1/3]
 ]], [start])
 
 # Crear Markov chain
@@ -59,7 +61,7 @@ t = torch.matmul(u, P)
 print(f't = {t}')
 
 '''
-w = tensor([0.2222, 0.1389, 0.1389, 0.1389, 0.1389, 0.2222])
-u = tensor([0.2130, 0.1435, 0.1435, 0.1435, 0.1435, 0.2130])
-t = tensor([0.2145, 0.1427, 0.1427, 0.1427, 0.1427, 0.2145])
+w = tensor([0.3333, 0.3333, 0.0000, 0.3333, 0.0000, 0.0000])
+u = tensor([0.3333, 0.2222, 0.1111, 0.2222, 0.1111, 0.0000])
+t = tensor([0.2593, 0.2222, 0.1111, 0.2407, 0.1296, 0.0370])
 '''
