@@ -5,8 +5,8 @@ import torch
 
 '''
 Cambiamos ahora las probabilidades iniciales al encender el robot.
-Las probabilidades de comenzar el día en una sala u otra son distintas.
-Una vez encendido el robot, se mueve a una sala contigua
+Las probabilidades de comenzar el día en una habitación u otra son distintas.
+Una vez encendido el robot, se mueve a una habitación contigua
 o permanece en la misma con igual probabilidad.
 '''
 
@@ -57,3 +57,9 @@ print(f'u = {u}')
 # Probabilidades en el cuarto dia de la serie
 t = torch.matmul(u, P)
 print(f't = {t}')
+
+'''
+w = tensor([0.1917, 0.1667, 0.1833, 0.0917, 0.1583, 0.2083])
+u = tensor([0.1931, 0.1472, 0.1611, 0.1097, 0.1486, 0.2403])
+t = tensor([0.1928, 0.1380, 0.1606, 0.1192, 0.1544, 0.2350])
+'''

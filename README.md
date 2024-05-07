@@ -461,9 +461,9 @@ t = torch.matmul(u, P)
 # t = tensor([[0.6560, 0.3440]])
 ```
 
-### Ejercicio robot guía museo
+### Ejercicio robot aspirador
 
-En los _scripts_ [`model_robot_0x.py`](./markov_chain/model_robot_01.py) encontrarás el código correspondiente a una cadena de Markov estacionario que modela el posible movimiento de un robot guía de museo.
+En los _scripts_ [`model_robot_0x.py`](./markov_chain/model_robot_01.py) encontrarás el código correspondiente a una cadena de Markov estacionaria que modela el posible movimiento de un robot aspirador.
 
 ## Bibliografia
 
