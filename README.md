@@ -463,7 +463,78 @@ t = torch.matmul(u, P)
 
 ### Ejercicio robot aspirador
 
-En los _scripts_ [`model_robot_0x.py`](./markov_chain/model_robot_01.py) encontrarás el código correspondiente a una cadena de Markov estacionaria que modela el posible movimiento de un robot aspirador.
+En los _scripts_ [`model_robot_0x.py`](./markov_chain/model_robot_01.py) encontrarás el código correspondiente a una cadena de Markov estacionaria que modela el posible movimiento de un robot aspirador en una vivienda como la siguiente:
+
+!["mapa vivienda"](./doc/mapa_vivienda.png)
+
+Se plantean 6 diferentes supuestos en función de la distribución de la probabilidad inicial y de las probabilidades de transición entre las habitaciones (estados).
+
+Describimos el caso [model_robot_06](./markov_chain/model_robot_06.py)
+
+Disponemos de una vivienda en la que hay 6 habitaciones. El espacio de estados es, por tanto, $\epsilon = \{1,2,3,4,5,6\}$.
+
+$X_n$ es la habitación ocupada por el robot en el instante $n$.
+
+Se cumple la condición de Markov, pues el estado en $n+1$ depende únicamente del estado actual $n$, sin importar el pasado.
+
+La probabilidad de transición del estado $i$ al $j$ es:
+
+$$ p_{ij} = P(X_{n+1} = j | X_n = i) $$
+
+y la matriz de transición es de la forma:
+
+$$ 
+P = 
+\begin{bmatrix}
+p_{11} & p_{12} & ... & p{16} \\
+p_{21} & p_{22} & ... & p{26} \\
+... \\
+p_{61} & p_{62} & ... & p{66} \\
+\end{bmatrix}
+$$
+
+Dado el mapa de la vivienda, las probabilidades de transición quedan determinadas por los movimientos posibles entre las habitaciones comunicadas y la distribución de probabilidad que programemos en nuestro agente inteligente.
+
+* La probabilidad de transición entre habitaciones que no están directamente comunicadas es $0$.
+
+* Supongamos que indicamos al robot que la probabilidad de permanecer en la misma habitación es de un 20% respecto al total de los posibles movimientos a las habitaciones adyacentes para abandonar esa habitación.
+
+Realizamos los cálculos para la habitación 1. Distribuímos la probabilidad entre los posibles $k$-estados del mundo que pueden alcanzarse para satisfacer los axiomas de la teoría de la probabilidad. SI $w_i$ es la probabilidad del estado $i$:
+
+$$ w_i \ge 0 \quad para \quad i = 1, ..., k $$
+$$ \sum_{i=1}^{k} w_i = 1 $$
+
+
+$$ p_{11} = P(X_{n+1} = 1 | X_n = 1) = 1/5 $$
+$$ p_{12} = P(X_{n+1} = 2 | X_n = 1) = 2/5 $$
+$$ p_{12} = P(X_{n+1} = 3 | X_n = 1) = 0 $$
+$$ p_{14} = P(X_{n+1} = 4 | X_n = 1) = 2/5 $$
+$$ p_{15} = P(X_{n+1} = 5 | X_n = 1) = 0 $$
+$$ p_{16} = P(X_{n+1} = 6 | X_n = 1) = 0 $$
+
+Procediendo de igual modo con el resto de transiciones entre los estados $p_{2j}, p_{3j}, p_{4j}, p_{5j}, p_{6j}$ obtenemos la matriz de transición:
+
+```python
+P = [[1/5, 2/5, 0,   2/5, 0,   0],
+     [2/5, 1/5, 2/5, 0,   0,   0],
+     [0,   2/5, 1/5, 0,   0,   2/5],
+     [2/5, 0,   0,   1/5, 2/5, 0],
+     [0,   0,   0,   4/5, 1/5, 0],
+     [0,   0,   4/5, 0,   0,   1/5]]
+```
+
+El vector de probabilidades en el instante inicial es el siguiente:
+
+$$ \vec{v} = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> $$
+
+Como las probabilidades de transición son estacionarias, podemos calcular las probabilidades en el instante de tiempo $n+1$ aplicando:
+
+$$ \vec w = \vec v  P = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> \times 
+P = <0.6, 0.4> = <0.1667, 0.1667, 0.2333, 0.2333, 0.1000, 0.1000>$$
+
+Procedemos sucesivamente para calcular las probabilidades en los siguientes instantes.
+
+En los _scripts_ `model_robot_0x.py` dispones de distintos ejemplos cambiando el mapa y las distribuciones de probabilidades iniciales y de transición.
 
 ## Bibliografia
 
