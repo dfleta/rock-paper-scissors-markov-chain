@@ -486,10 +486,10 @@ y la matriz de transición es de la forma:
 $$ 
 P = 
 \begin{bmatrix}
-p_{11} & p_{12} & ... & p{16} \\
-p_{21} & p_{22} & ... & p{26} \\
+p_{11} & p_{12} & ... & p_{16} \\
+p_{21} & p_{22} & ... & p_{26} \\
 ... \\
-p_{61} & p_{62} & ... & p{66} \\
+p_{61} & p_{62} & ... & p_{66} \\
 \end{bmatrix}
 $$
 
@@ -507,10 +507,15 @@ $$ \sum_{i=1}^{k} w_i = 1 $$
 Cálculo de las probabilidades de la matriz de transición:
 
 $$ p_{11} = P(X_{n+1} = 1 | X_n = 1) = 1/5 $$
+
 $$ p_{12} = P(X_{n+1} = 2 | X_n = 1) = 2/5 $$
+
 $$ p_{12} = P(X_{n+1} = 3 | X_n = 1) = 0 $$
+
 $$ p_{14} = P(X_{n+1} = 4 | X_n = 1) = 2/5 $$
+
 $$ p_{15} = P(X_{n+1} = 5 | X_n = 1) = 0 $$
+
 $$ p_{16} = P(X_{n+1} = 6 | X_n = 1) = 0 $$
 
 Procediendo de igual modo con el resto de transiciones entre los estados $p_{2j}, p_{3j}, p_{4j}, p_{5j}, p_{6j}$ obtenemos la matriz de transición:
@@ -530,7 +535,7 @@ $$ \vec{v} = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> $$
 
 Como las probabilidades de transición son estacionarias, podemos calcular las probabilidades en el instante de tiempo $n+1$ aplicando:
 
-$$ \vec w = \vec v  P = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> \times 
+$$ \vec w = \vec v  P = <1/6, \ 1/6, \ 1/6, \ 1/6, \ 1/6, \ 1/6> \times 
 P = <0.1667, 0.1667, 0.2333, 0.2333, 0.1000, 0.1000>$$
 
 Repetimos este cálculo para calcular las probabilidades en los siguientes instantes.
