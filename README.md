@@ -499,11 +499,12 @@ Dado el mapa de la vivienda, las probabilidades de transición quedan determinad
 
 * Supongamos que indicamos al robot que la probabilidad de permanecer en la misma habitación es de un 20% respecto al total de los posibles movimientos a las habitaciones adyacentes para abandonar esa habitación.
 
-Realizamos los cálculos para la habitación 1. Distribuímos la probabilidad entre los posibles $k$-estados del mundo que pueden alcanzarse para satisfacer los axiomas de la teoría de la probabilidad. SI $w_i$ es la probabilidad del estado $i$:
+Realizamos los cálculos para la habitación 1. Distribuímos la probabilidad entre los posibles $k$-estados del mundo que pueden alcanzarse (las habitaciones adyacentes a la habitación 1) para satisfacer los axiomas de la teoría de la probabilidad. Si $w_i$ es la probabilidad del estado $i$:
 
 $$ w_i \ge 0 \quad para \quad i = 1, ..., k $$
 $$ \sum_{i=1}^{k} w_i = 1 $$
 
+Cálculo de las probabilidades de la matriz de transición:
 
 $$ p_{11} = P(X_{n+1} = 1 | X_n = 1) = 1/5 $$
 $$ p_{12} = P(X_{n+1} = 2 | X_n = 1) = 2/5 $$
@@ -530,11 +531,13 @@ $$ \vec{v} = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> $$
 Como las probabilidades de transición son estacionarias, podemos calcular las probabilidades en el instante de tiempo $n+1$ aplicando:
 
 $$ \vec w = \vec v  P = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> \times 
-P = <0.6, 0.4> = <0.1667, 0.1667, 0.2333, 0.2333, 0.1000, 0.1000>$$
+P = <0.1667, 0.1667, 0.2333, 0.2333, 0.1000, 0.1000>$$
 
-Procedemos sucesivamente para calcular las probabilidades en los siguientes instantes.
+Repetimos este cálculo para calcular las probabilidades en los siguientes instantes.
 
-En los _scripts_ `model_robot_0x.py` dispones de distintos ejemplos cambiando el mapa y las distribuciones de probabilidades iniciales y de transición.
+En los _scripts_ `model_robot_0x.py` dispones de distintos ejemplos cambiando las distribuciones de probabilidades iniciales y de transición, y estableciendo el mapa de modo que las habitaciones adyacentes sean 1 - 2 - 4 y 3 - 5 - 6:
+
+!["mapa vivienda"](./doc/mapa_vivienda_tabiques.png)
 
 ## Bibliografia
 
