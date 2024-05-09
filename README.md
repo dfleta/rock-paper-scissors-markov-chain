@@ -531,7 +531,7 @@ P = [[1/5, 2/5, 0,   2/5, 0,   0],
 
 El vector de probabilidades en el instante inicial es el siguiente:
 
-$$ \vec{v} = <1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6, \; 1/6> $$
+$$ \vec{v} = <1/6, \ 1/6, \ 1/6, \ 1/6, \ 1/6, \ 1/6> $$
 
 Como las probabilidades de transición son estacionarias, podemos calcular las probabilidades en el instante de tiempo $n+1$ aplicando:
 
