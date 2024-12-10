@@ -1,5 +1,5 @@
 import random
-import probabilidades_rps as DTMC
+import rps.probabilidades_rps as DTMC
 from enum import IntEnum
 from statistics import mode
 
@@ -93,6 +93,20 @@ class Game:
         return another_round.lower() == 'y'
 
 
+    def user_actions_history_dumps(self):
+        file = open('user_actions_history.txt', 'a', encoding="utf-8")
+        print([action.name for action in self.user_actions_history])
+        file.write(repr([action.value for action in self.user_actions_history]) + '\n')
+        file.close()
+
+
+    def user_actions_history_load(self):
+        file = open('user_actions_history.txt', 'r', encoding="utf-8")
+        for line in file:
+            print(eval(line))
+        file.close()
+
+
     def play(self):
         while True:
             computer_action = self.get_computer_action()
@@ -110,8 +124,8 @@ class Game:
             if not self.play_another_round():
                 break
 
-        print([action.value for action in self.user_actions_history])
-        print([action.name for action in self.user_actions_history])
+        self.user_actions_history_dumps()
+        self.user_actions_history_load()
 
 
 if __name__ == "__main__":
