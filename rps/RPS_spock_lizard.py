@@ -1,7 +1,5 @@
-import random
-import rps.probabilidades_rps as DTMC
+import probabilities_rps_computed as DTMC
 from enum import IntEnum
-from statistics import mode
 
 
 class GameAction(IntEnum):
