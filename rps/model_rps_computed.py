@@ -41,9 +41,9 @@ X = torch.tensor(samples)
 file = open('user_actions_history.txt', 'r', encoding="utf-8")
 
 def chain_to_tensor(chain):
-    samples = [[sample] for sample in chain]
+    chain_samples = [[sample] for sample in chain]
     # print(samples)
-    samples_repr_as_tensor = [list(pair) for pair in zip(samples, samples[1:])]
+    samples_repr_as_tensor = [list(pair) for pair in zip(chain_samples, chain_samples[1:])]
     # print(samples_repr_as_tensor)
     # print(torch.tensor(samples_repr_as_tensor))
     return torch.tensor(samples_repr_as_tensor)
@@ -74,4 +74,4 @@ def series_probabilities():
 if __name__ == '__main__':
     print(initial_probabilites())
     print(transition_matrix())
-    print(series_probabilities())
+    # print(series_probabilities())

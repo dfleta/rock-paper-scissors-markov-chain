@@ -16,6 +16,7 @@ def max_probab_postaction_value(preaction):
 def max_probab_postaction_index(preaction):
     return torch.argmax(transition_matrix[preaction]).item()
 
+
 def max_initial_probability_index():
     return torch.argmax(initial_probabilites).item()
 

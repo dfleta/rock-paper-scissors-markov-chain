@@ -13,6 +13,10 @@ class GameAction(IntEnum):
     def minus(cls, *actions_excluded):
         return [ action for action in GameAction if action not in actions_excluded ]
 
+    @classmethod
+    def complement(cls, action):
+        return GameAction((action + 1) % 3)
+
 
 class GameResult(IntEnum):
     Victory = 0
@@ -65,11 +69,14 @@ class Game:
 
         # No previous user actions => max initial probability action
         if not self.user_actions_history or not self.game_history:
-            computer_action = GameAction(DTMC.max_initial_probability_index())
+            post_action = GameAction(DTMC.max_initial_probability_index())
+
         # Alternative AI functionality
         # Markov chain (Discrete Time Markov Chain)
         else:
-            computer_action = GameAction(DTMC.max_probab_postaction_index(self.user_actions_history[-1].value))
+            post_action = GameAction(DTMC.max_probab_postaction_index(self.user_actions_history[-1].value))
+
+        computer_action = GameAction.complement(post_action)
 
         print(f"Computer picked {computer_action.name}.")
 
