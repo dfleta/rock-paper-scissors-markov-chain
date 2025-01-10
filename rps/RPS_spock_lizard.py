@@ -1,11 +1,11 @@
-import probabilities_rps_computed as DTMC
 from enum import IntEnum
+import probabilities_rps_computed as DTMC
 
 
 class GameAction(IntEnum):
-    Rock = 0
-    Paper = 1
-    Scissors = 2
+    ROCK = 0
+    PAPER = 1
+    SCISSORS = 2
     # Spock = 3
     # Lizard = 4
 
@@ -19,9 +19,9 @@ class GameAction(IntEnum):
 
 
 class GameResult(IntEnum):
-    Victory = 0
-    Defeat = 1
-    Tie = 2
+    VICTORY = 0
+    DEFEAT = 1
+    TIE = 2
 
 
 class Game:
@@ -31,11 +31,11 @@ class Game:
         self.user_actions_history = []
 
         self.victories = {
-            GameAction.Rock: GameAction.minus(GameAction.Scissors, # GameAction.Lizard
+            GameAction.ROCK: GameAction.minus(GameAction.SCISSORS, # GameAction.Lizard
                                               ),
-            GameAction.Paper: GameAction.minus(# GameAction.Spock, 
-                GameAction.Rock),
-            GameAction.Scissors: GameAction.minus(GameAction.Paper, # GameAction.Lizard
+            GameAction.PAPER: GameAction.minus(# GameAction.Spock,
+                GameAction.ROCK),
+            GameAction.SCISSORS: GameAction.minus(GameAction.PAPER, # GameAction.Lizard
                                                   ),
             # GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
             # GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper)
@@ -52,15 +52,15 @@ class Game:
 
         if user_action == computer_action:
             print(f"User and computer picked {user_action.name}. Draw game!")
-            game_result = GameResult.Tie
+            game_result = GameResult.TIE
 
         elif computer_action in self.victories[user_action]:
             print(f"{computer_action.name} wins {user_action.name}. You lost!")
-            game_result = GameResult.Defeat
+            game_result = GameResult.DEFEAT
 
         else:
             print(f"{user_action.name} wins {computer_action.name}. You win!")
-            game_result = GameResult.Victory
+            game_result = GameResult.VICTORY
 
         return game_result
 
