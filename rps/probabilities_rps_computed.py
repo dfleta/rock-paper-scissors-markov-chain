@@ -5,6 +5,7 @@ initial_probabilites = model.initial_probabilites()
 
 transition_matrix = model.transition_matrix()
 
+
 def transition_probability(preaction, postaction):
     return transition_matrix[preaction][postaction].item()
 
@@ -21,8 +22,12 @@ def max_initial_probability_index():
     return torch.argmax(initial_probabilites).item()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
+    print("probabilidad Paper -> Paper:")
     print(transition_probability(1, 1))
+    print("accion con mayor probabilidad tras Paper:")
     print(max_probab_postaction_value(1))
+    print("probab de la accion con mayor probabilidad tras Paper:")
     print(max_probab_postaction_index(1))
+    print("accion con mayor probabilidad inicial:")
     print(max_initial_probability_index())

@@ -11,7 +11,7 @@ class GameAction(IntEnum):
 
     @classmethod
     def minus(cls, *actions_excluded):
-        return [ action for action in GameAction if action not in actions_excluded ]
+        return [action for action in GameAction if action not in actions_excluded]
 
     @classmethod
     def complement(cls, action):
@@ -25,18 +25,20 @@ class GameResult(IntEnum):
 
 
 class Game:
-
     def __init__(self):
         self.game_history = []
         self.user_actions_history = []
 
         self.victories = {
-            GameAction.ROCK: GameAction.minus(GameAction.SCISSORS, # GameAction.Lizard
-                                              ),
-            GameAction.PAPER: GameAction.minus(# GameAction.Spock,
-                GameAction.ROCK),
-            GameAction.SCISSORS: GameAction.minus(GameAction.PAPER, # GameAction.Lizard
-                                                  ),
+            GameAction.ROCK: GameAction.minus(
+                GameAction.SCISSORS,  # GameAction.Lizard
+            ),
+            GameAction.PAPER: GameAction.minus(  # GameAction.Spock,
+                GameAction.ROCK
+            ),
+            GameAction.SCISSORS: GameAction.minus(
+                GameAction.PAPER,  # GameAction.Lizard
+            ),
             # GameAction.Spock: GameAction.minus(GameAction.Scissors, GameAction.Rock),
             # GameAction.Lizard: GameAction.minus(GameAction.Spock, GameAction.Paper)
         }
@@ -64,9 +66,7 @@ class Game:
 
         return game_result
 
-
     def get_computer_action(self):
-
         # No previous user actions => max initial probability action
         if not self.user_actions_history or not self.game_history:
             post_action = GameAction(DTMC.max_initial_probability_index())
@@ -74,43 +74,40 @@ class Game:
         # Alternative AI functionality
         # Markov chain (Discrete Time Markov Chain)
         else:
-            post_action = GameAction(DTMC.max_probab_postaction_index(self.user_actions_history[-1].value))
+            post_action = GameAction(
+                DTMC.max_probab_postaction_index(self.user_actions_history[-1].value)
+            )
 
         computer_action = GameAction.complement(post_action)
 
-        print(f"Computer picked {computer_action.name}.")
-
         return computer_action
-
 
     def get_user_action(self):
         # Scalable to more options (beyond rock, paper and scissors...)
-        game_choices = [f"{game_action.name}[{game_action.value}]" for game_action in GameAction]
+        game_choices = [
+            f"{game_action.name}[{game_action.value}]" for game_action in GameAction
+        ]
         game_choices_str = ", ".join(game_choices)
         user_selection = int(input(f"\nPick a choice ({game_choices_str}): "))
         user_action = GameAction(user_selection)
 
         return user_action
 
-
     def play_another_round(self):
         another_round = input("\nAnother round? (y/n): ")
-        return another_round.lower() == 'y'
-
+        return another_round.lower() == "y"
 
     def user_actions_history_dumps(self):
-        file = open('user_actions_history.txt', 'a', encoding="utf-8")
+        file = open("user_actions_history.txt", "a", encoding="utf-8")
         print([action.name for action in self.user_actions_history])
-        file.write(repr([action.value for action in self.user_actions_history]) + '\n')
+        file.write(repr([action.value for action in self.user_actions_history]) + "\n")
         file.close()
 
-
     def user_actions_history_load(self):
-        file = open('user_actions_history.txt', 'r', encoding="utf-8")
+        file = open("user_actions_history.txt", "r", encoding="utf-8")
         for line in file:
             print(eval(line))
         file.close()
-
 
     def play(self):
         while True:
@@ -123,6 +120,7 @@ class Game:
                 print(f"Invalid selection. Pick a choice in range {range_str}!")
                 continue
 
+            print(f"Computer picked {computer_action.name}.")
             game_result = self.assess_game(user_action, computer_action)
             self.game_history_append(game_result)
 
@@ -134,7 +132,5 @@ class Game:
 
 
 if __name__ == "__main__":
-
     game = Game()
     game.play()
-    
