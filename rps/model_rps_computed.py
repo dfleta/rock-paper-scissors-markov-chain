@@ -11,7 +11,7 @@ SCISSORS = 2
 class RPSMarkovModel:
     def __init__(self, k=1):
         self.model = MarkovChain(k=k)
-        self._initialize_training_data()
+        self.X = self._initialize_training_data()
         self.train()
 
     def _initialize_training_data(self):
@@ -43,7 +43,7 @@ class RPSMarkovModel:
             [[SCISSORS], [SCISSORS]],
             [[SCISSORS], [ROCK]],
         ]
-        self.X = torch.tensor(initial_samples)
+        return torch.tensor(initial_samples)
 
     @staticmethod
     def chain_to_tensor(chain):
@@ -54,7 +54,9 @@ class RPSMarkovModel:
         return torch.tensor(samples_repr_as_tensor)
 
     def train(self):
+        print(self.X.shape)
         for actions in UserActionsFileHandler.read_actions():
+            print(actions)
             T = self.chain_to_tensor(actions)
             self.X = torch.cat((self.X, T), 0)
 
