@@ -1,88 +1,83 @@
-from pomegranate.markov_chain import MarkovChain
 import torch
+from pomegranate.markov_chain import MarkovChain
+from file_handler import UserActionsFileHandler
 
-# Crear Markov chain
-model = MarkovChain(k=1)
-
-# Secuencia de observaciones
-# muestras
-
-samples = [
-    [[1], [2]],  # P S
-    [[1], [0]],  # P R
-    [[1], [0]],  # P R
-    [[1], [2]],
-    [[1], [0]],
-    [[1], [1]],  # P P
-    [[1], [0]],
-    [[1], [0]],
-    [[0], [0]],
-    [[0], [0]],
-    [[0], [1]],
-    [[0], [2]],
-    [[0], [0]],
-    [[0], [0]],
-    [[0], [1]],
-    [[0], [2]],
-    [[2], [0]],
-    [[2], [1]],
-    [[2], [2]],
-    [[2], [0]],
-    [[2], [2]],
-    [[2], [0]],
-    [[2], [1]],
-    [[2], [2]],
-    [[2], [0]],
-]
-
-X = torch.tensor(samples)
-# print(X.shape)
-
-# Z = torch.tensor([[[0], [0]]])
-
-file = open("user_actions_history.txt", "r", encoding="utf-8")
+# Constants
+ROCK = 0
+PAPER = 1
+SCISSORS = 2
 
 
-def chain_to_tensor(chain):
-    chain_samples = [[sample] for sample in chain]
-    samples_repr_as_tensor = [
-        list(pair) for pair in zip(chain_samples, chain_samples[1:])
-    ]
-    # Los pares de transición se generan agrupando
-    # las posiciones contiguas en la lista de cada
-    # linea del fichero.
-    # pos 1 -> pos 2; pos 2 -> pos 3...
-    return torch.tensor(samples_repr_as_tensor)
+class RPSMarkovModel:
+    def __init__(self, k=1):
+        self.model = MarkovChain(k=k)
+        self._initialize_training_data()
+        self.train()
+
+    def _initialize_training_data(self):
+        """Initialize the model with some basic training data."""
+        initial_samples = [
+            [[PAPER], [SCISSORS]],
+            [[PAPER], [ROCK]],
+            [[PAPER], [ROCK]],
+            [[PAPER], [SCISSORS]],
+            [[PAPER], [ROCK]],
+            [[PAPER], [PAPER]],
+            [[PAPER], [ROCK]],
+            [[PAPER], [ROCK]],
+            [[ROCK], [ROCK]],
+            [[ROCK], [ROCK]],
+            [[ROCK], [PAPER]],
+            [[ROCK], [SCISSORS]],
+            [[ROCK], [ROCK]],
+            [[ROCK], [ROCK]],
+            [[ROCK], [PAPER]],
+            [[ROCK], [SCISSORS]],
+            [[SCISSORS], [ROCK]],
+            [[SCISSORS], [PAPER]],
+            [[SCISSORS], [SCISSORS]],
+            [[SCISSORS], [ROCK]],
+            [[SCISSORS], [SCISSORS]],
+            [[SCISSORS], [ROCK]],
+            [[SCISSORS], [PAPER]],
+            [[SCISSORS], [SCISSORS]],
+            [[SCISSORS], [ROCK]],
+        ]
+        self.X = torch.tensor(initial_samples)
+
+    @staticmethod
+    def chain_to_tensor(chain):
+        chain_samples = [[sample] for sample in chain]
+        samples_repr_as_tensor = [
+            list(pair) for pair in zip(chain_samples, chain_samples[1:])
+        ]
+        return torch.tensor(samples_repr_as_tensor)
+
+    def train(self):
+        for actions in UserActionsFileHandler.read_actions():
+            T = self.chain_to_tensor(actions)
+            self.X = torch.cat((self.X, T), 0)
+
+        self.model.fit(self.X)
+
+    def initial_probabilities(self):
+        return self.model.distributions[0].probs[0]
+
+    def transition_matrix(self):
+        return self.model.distributions[1].probs[0]
+
+    def series_probability(self):
+        return self.model.probability(self.X)
 
 
-for line in file:
-    T = chain_to_tensor(eval(line))
-    # acumulador ;)
-    X = torch.cat((X, T), 0)
+def main() -> None:
+    model = RPSMarkovModel()
 
-file.close()
-
-model_rps = MarkovChain(k=1)
-model_rps.fit(X)
-
-
-def initial_probabilites():
-    # Probabilidades iniciales (Categorical)
-    return model_rps.distributions[0].probs[0]
-
-
-def transition_matrix():
-    # Probabilidades de transición o condicionadas (ConditionalCategorical)
-    return model_rps.distributions[1].probs[0]
-
-
-def series_probabilities():
-    # Probabilidad de la serie
-    return model_rps.probability(X)
+    print("Initial probabilities:")
+    print(model.initial_probabilities())
+    print("\nTransition matrix:")
+    print(model.transition_matrix())
 
 
 if __name__ == "__main__":
-    print("Probabilidades iniciales:")
-    print(initial_probabilites())
-    print("Matriz de transicion:")
-    print(transition_matrix())
+    main()

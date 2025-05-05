@@ -1,5 +1,6 @@
 from enum import IntEnum
-import probabilities_rps_computed as DTMC
+from probabilities_rps_computed import RPSProbabilityAnalyzer
+from file_handler import UserActionsFileHandler
 
 
 class GameAction(IntEnum):
@@ -28,6 +29,8 @@ class Game:
     def __init__(self):
         self.game_history = []
         self.user_actions_history = []
+        self.probability_analyzer = RPSProbabilityAnalyzer()
+        self.training_data = UserActionsFileHandler()
 
         self.victories = {
             GameAction.ROCK: GameAction.minus(
@@ -69,13 +72,17 @@ class Game:
     def get_computer_action(self):
         # No previous user actions => max initial probability action
         if not self.user_actions_history or not self.game_history:
-            post_action = GameAction(DTMC.max_initial_probability_index())
+            post_action = GameAction(
+                self.probability_analyzer.most_likely_initial_action()
+            )
 
         # Alternative AI functionality
         # Markov chain (Discrete Time Markov Chain)
         else:
             post_action = GameAction(
-                DTMC.max_probab_postaction_index(self.user_actions_history[-1].value)
+                self.probability_analyzer.most_likely_post_action(
+                    self.user_actions_history[-1].value
+                )
             )
 
         computer_action = GameAction.complement(post_action)
@@ -98,16 +105,15 @@ class Game:
         return another_round.lower() == "y"
 
     def user_actions_history_dumps(self):
-        file = open("user_actions_history.txt", "a", encoding="utf-8")
         print([action.name for action in self.user_actions_history])
-        file.write(repr([action.value for action in self.user_actions_history]) + "\n")
-        file.close()
+        self.training_data.append_actions(
+            [action.value for action in self.user_actions_history]
+        )
 
     def user_actions_history_load(self):
-        file = open("user_actions_history.txt", "r", encoding="utf-8")
-        for line in file:
-            print(eval(line))
-        file.close()
+        actions = self.training_data.read_actions()
+        for actions_list in actions:
+            print(actions_list)
 
     def play(self):
         while True:
