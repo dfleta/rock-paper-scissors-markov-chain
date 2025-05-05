@@ -1,7 +1,7 @@
 Predicción de Jugadas en Piedra, Papel o Tijeras usando Cadenas de Markov
 =========================================================================
 
-Este proyecto implementa un sistema de predicción de jugadas para el juego Piedra, Papel o Tijeras utilizando cadenas de Markov. El sistema analiza el historial de jugadas del usuario para predecir su siguiente movimiento.
+Este proyecto implementa un sistema de predicción de jugadas para el juego Piedra, Papel o Tijeras utilizando [cadenas de Markov](./Matemáticas%20de%20las%20cadenas%20de%20Markov.md). El sistema analiza el historial de jugadas del usuario para predecir su siguiente movimiento.
 
 ## Estructura del Proyecto
 
@@ -86,3 +86,51 @@ max_prob = analyzer.max_post_action_probability(PAPER)
 2. Añadir análisis de patrones más complejos
 3. Incorporar técnicas de aprendizaje por refuerzo
 4. Mejorar la visualización de las probabilidades
+
+## Instalación
+
+Es necesario el uso del paquete [Pomegranate](https://pomegranate.readthedocs.io/en/stable/index.html):
+
+> Pomegranate is a python package which implements fast, efficient, and extremely flexible probabilistic models ranging from probability distributions to Bayesian networks to mixtures of hidden Markov models.
+
+`python -m venv venv`
+
+`source venv/bin/activate`
+
+Instalar la versión estricta de pomegranate `v1.0.4`:
+
+`pip install -r requirements.txt`
+
+o
+
+`pip install pomegranate`
+
+## Uso
+
+```bash
+cd rps
+rps% python3 RPS_spock_lizard.py
+
+Pick a choice (ROCK[0], PAPER[1], SCISSORS[2]): 1
+Computer picked SCISSORS.
+SCISSORS wins PAPER. You lost!
+
+Another round? (y/n): y
+
+Pick a choice (ROCK[0], PAPER[1], SCISSORS[2]): 0
+Computer picked ROCK.
+User and computer picked ROCK. Draw game!
+
+Another round? (y/n): y
+
+Pick a choice (ROCK[0], PAPER[1], SCISSORS[2]): 1
+Computer picked ROCK.
+PAPER wins ROCK. You win!
+
+Another round? (y/n): n
+
+['PAPER', 'PAPER', 'ROCK', 'SCISSORS', 'SCISSORS', 'SCISSORS', 'PAPER']
+# historico de partidas guardadas en el fichero user_actions_history.txt
+[1, 2, 0, 1, 2, 0]
+...
+```
