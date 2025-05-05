@@ -55,7 +55,6 @@ class RPSMarkovModel:
 
     def train(self):
         for actions in UserActionsFileHandler.read_actions():
-            print(actions)
             T = self.chain_to_tensor(actions)
             self.X = torch.cat((self.X, T), 0)
 
