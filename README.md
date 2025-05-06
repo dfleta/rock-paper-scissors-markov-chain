@@ -67,26 +67,6 @@ next_action = analyzer.most_likely_post_action(PAPER)
 max_prob = analyzer.max_post_action_probability(PAPER)
 ```
 
-## Ventajas del Enfoque
-
-1. **Aprendizaje Adaptativo**: El modelo se actualiza con cada nueva jugada
-2. **Eficiencia**: Uso de tensores para cálculos rápidos
-3. **Persistencia**: Almacenamiento del historial para aprendizaje continuo
-4. **Flexibilidad**: Fácil extensión para análisis más complejos
-
-## Limitaciones
-
-1. El modelo asume que el comportamiento del jugador sigue un patrón de Markov
-2. La precisión depende de la cantidad y calidad de los datos históricos
-3. No considera estrategias a largo plazo del jugador
-
-## Mejoras Futuras
-
-1. Implementar cadenas de Markov de orden superior
-2. Añadir análisis de patrones más complejos
-3. Incorporar técnicas de aprendizaje por refuerzo
-4. Mejorar la visualización de las probabilidades
-
 ## Instalación
 
 Es necesario el uso del paquete [Pomegranate](https://pomegranate.readthedocs.io/en/stable/index.html):
